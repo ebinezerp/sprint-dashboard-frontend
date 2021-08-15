@@ -1,0 +1,13 @@
+div.card{
+    padding:2%;
+}
+table{
+    width: 100%;
+}
+table > tr> td{
+    padding-bottom: 1%;
+}
+
+.form-control[readonly] {
+    background-color: #fff;
+}

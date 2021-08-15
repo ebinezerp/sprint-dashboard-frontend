@@ -1,0 +1,16 @@
+<form (submit)="search(searchForm)" #searchForm="ngForm" class="mt-5">
+    <div class="form-group row align-items-center">
+      <label class="col-md-5">Project Name:</label>
+      <select class="form-control col-md-6" name="projectName" ngModel>
+          <option value="">Select</option>
+          <option *ngFor="let project of projectList" value="{{project.projectName}}">{{project.projectName}}</option>
+      </select>
+    </div>
+    <div class="form-group row align-items-center">
+      <label class="col-md-5">Date:</label>
+      <input type="date" class="form-control col-md-6" name="sprint-date" ngModel/>
+    </div>
+    <div class="form-group row align-items-center">
+        <input type="submit" class="form-control btn btn-primary ml-auto mr-auto col-md-6" value="Search" name="sprint-date"/>
+      </div>
+  </form>

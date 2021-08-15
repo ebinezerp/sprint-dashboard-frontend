@@ -1,0 +1,14 @@
+div.main-container{
+    width: 95%;
+}
+
+.nav-item{
+    background-color: #3f51b5 !important;
+}
+.nav-link{
+    color:#ffffff !important;
+}
+
+.router-link-active{
+    background-color:cornflowerblue;
+}

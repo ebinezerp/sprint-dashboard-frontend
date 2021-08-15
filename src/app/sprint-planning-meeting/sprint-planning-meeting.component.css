@@ -1,0 +1,15 @@
+div.card{
+    padding:2%;
+}
+
+input,select{
+    font-size: small !important;
+    padding:0;
+}
+.row{
+    margin-top: 2%;
+}
+
+.form-control[readonly] {
+    background-color: #fff;
+}

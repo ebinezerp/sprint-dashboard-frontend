@@ -1,0 +1,218 @@
+<div>
+  <h1 class="text-center">Sprint Review</h1>
+  <app-sprint-details></app-sprint-details>
+  <div class="card">
+    <div class="card-text">
+      <div class="row">
+        <div class="col-md-3 offset-md-8">
+        <button (click)="navgLoc()"
+          class="btn btn-primary float-right">LOC</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <p>Attendance of PO:</p>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>Present</option>
+            <option>Absent</option>
+          </select>
+        </div>
+        <div class="col-md-2"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <p>Participation of development members:</p>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <div class="row border border-secondary rounded d-flex flex-row align-items-center">
+            <input type="text" class="col-md-8 form-control border border-light" readonly="readonly" />
+            <span class="col-md-1">%</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <p>Attendance of ASPM:</p>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <div class="row border border-secondary rounded d-flex flex-row align-items-center">
+            <input type="text" class="col-md-8 form-control border border-light" readonly="readonly" />
+            <span class="col-md-1">%</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <p>Attendance of Asst. SM:</p>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        <div class="col-md-2">
+          <div class="row border border-secondary rounded d-flex flex-row align-items-center">
+            <input type="text" class="col-md-8 form-control border border-light" readonly="readonly" />
+            <span class="col-md-1">%</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <p>Event Time:</p>
+        </div>
+        <div class="col-md-2">
+          <select class="form-control">
+            <option>0.5</option>
+            <option>1</option>
+            <option>1.5</option>
+            <option>2</option>
+            <option>2.5</option>
+            <option>3</option>
+            <option>3.5</option>
+            <option>4</option>
+          </select>
+        </div>
+        <div class="col-md-1 p-0 pt-2 align-self-center">
+          <p class="p-0">H</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label>Number of errors in static analysis:</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label>Number of unit test case:</label>
+        </div>
+        <div class="col-md-2">
+          <input type="text" name="" class="form-control" />
+        </div>
+        <div class="col-md-3 d-flex">
+          <label>Upper Limit:</label>
+          <input type="text" name="" class="form-control" />
+        </div>
+        <div class="col-md-3 d-flex">
+          <label>Lower Limit:</label>
+          <input type="text" name="" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label>Unit test covarage (C0/C1):</label>
+        </div>
+        <div class="col-md-2">
+          <div class="row border border-secondary rounded d-flex flex-row align-items-center">
+            <input type="text" class="col-md-8 form-control border border-light" readonly="readonly" />
+            <span class="col-md-1">%</span>
+          </div>
+        </div>
+        <div class="col-md-4 mt-auto mb-auto">
+          <label>Number of bugs in the unit test:</label>
+        </div>
+        <div class="col-md-2">
+          <input type="text" name="" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label>Number of bugs in TL review:</label>
+        </div>
+        <div class="col-md-2">
+          <input type="text" name="" class="form-control" />
+        </div>
+        <div class="col-md-4 mt-auto mb-auto">
+          <label>TL review improvements:</label>
+        </div>
+        <div class="col-md-2">
+          <input type="text" name="" class="form-control" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">
+          <label>Number of bugs in AS review:</label>
+        </div>
+        <div class="col-md-2">
+          <input type="text" name="" class="form-control" />
+        </div>
+        <div class="col-md-4 mt-auto mb-auto">
+          <label>ASPM review improvements:</label>
+        </div>
+        <div class="col-md-2">
+          <input type="text" name="" class="form-control" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-3">
+          <label>Acceptance test
+            (PO Review) no of feedbacks:</label>
+        </div>
+        <div class="col-md-2">
+          <input type="text" name="" class="form-control" />
+        </div>
+        <div class="col-md-4 mt-auto mb-auto">
+          <label>Acceptance test
+            (PO Review) no of bugs:</label>
+        </div>
+        <div class="col-md-2">
+          <input type="text" name="" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label>CI Success:</label>
+        </div>
+        <div class="col-md-2">
+          <select name="" class="form-control">
+            <option>Yes</option>
+            <option>No</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mt-auto mb-auto">
+          <label class="align-center">Comments:</label>
+        </div>
+        <div class="col-md-6">
+          <textarea class="form-control" rows=3></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 offset-md-5">
+          <input type="reset" value="Clear" class="form-control btn btn-warning" />
+        </div>
+        <div class="col-md-2">
+          <input type="submit" value="Update" class="form-control btn btn-warning" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

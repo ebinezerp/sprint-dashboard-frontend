@@ -1,0 +1,28 @@
+<div class="main-container ml-auto mr-auto">
+  <app-header></app-header>
+  <div class="row mt-5">
+    <div class="sidebar col-md-3">
+      <ul class="nav nav-tabs flex-column">
+        <li class="nav-item mb-3 border border-secondary rounded">
+          <a class="nav-link" [routerLink]="['/daily-scrum']" routerLinkActive="router-link-active">Daily Scrum</a>
+        </li>
+        <li class="nav-item mb-3 border border-secondary rounded">
+          <a class="nav-link" [routerLink]="['/sprint-planning-meeting']" routerLinkActive="router-link-active">Sprint
+            Planning Meeting</a>
+        </li>
+        <li class="nav-item mb-3 border border-secondary rounded">
+          <a class="nav-link" [routerLink]="['/sprint-review']" routerLinkActive="router-link-active">Sprint Review</a>
+        </li>
+        <li class="nav-item mb-3 border border-secondary rounded">
+          <a class="nav-link" [routerLink]="['/retrospective']" routerLinkActive="router-link-active">Retrospective</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="col-md-3">
+      <app-search></app-search>
+    </div>
+  </div>
+</div>
