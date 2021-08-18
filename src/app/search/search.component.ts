@@ -29,7 +29,7 @@ export class SearchComponent implements OnInit {
 
 
   search(form:NgForm){
-    console.log(form);
+    this.projectService.selectProject(form.value.projectId);
   }
 
 }

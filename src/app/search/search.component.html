@@ -1,9 +1,9 @@
 <form (submit)="search(searchForm)" #searchForm="ngForm" class="mt-5">
     <div class="form-group row align-items-center">
       <label class="col-md-5">Project Name:</label>
-      <select class="form-control col-md-6" name="projectName" ngModel>
+      <select class="form-control col-md-6" name="projectId" ngModel>
           <option value="">Select</option>
-          <option *ngFor="let project of projectList" value="{{project.projectName}}">{{project.projectName}}</option>
+          <option *ngFor="let project of projectList" value="{{project.projectId}}">{{project.projectName}}</option>
       </select>
     </div>
     <div class="form-group row align-items-center">
