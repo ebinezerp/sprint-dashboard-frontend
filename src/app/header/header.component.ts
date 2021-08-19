@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../services/project.service';
+import { SprintService } from '../services/sprint.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -10,16 +12,19 @@ export class HeaderComponent implements OnInit {
 
   projectName?: string;
 
-  constructor(private projectService: ProjectService) {
+
+  constructor(
+    private sprintService: SprintService
+    ) {
     this.projectName='';
   }
 
   ngOnInit(): void {
-    this.projectService.selectedProject.subscribe(
-      (project) => {
-        this.projectName = project.projectName;
+    this.sprintService.currentSprint.subscribe(
+      (sprint) => {
+        this.projectName = sprint.project?.projectName;
       }
-    )
+    );
   }
 
 }

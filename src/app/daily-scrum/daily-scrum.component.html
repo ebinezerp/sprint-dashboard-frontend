@@ -3,181 +3,200 @@
   <app-sprint-details></app-sprint-details>
   <div class="card">
     <div class="card-text">
-      <table>
-        <tr class="row">
-          <td class="col-md-4"></td>
-          <td class="col-md-2"></td>
-          <td class="col-md-2"></td>
-          <td class="col-md-4 text-start">Avarage during the sprint</td>
-        </tr>
-        <tr class="row">
-          <td class="col-md-4">
-            <label>Number of work in process task:</label>
-          </td>
-          <td class="col-md-2">
-            <select class="form-control" size="2" name="noOfTasks" [(ngModel)]="scrum.noOfTasks">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </td>
-          <td class="col-md-2">
-          </td>
-          <td class="col-md-2"></td>
-          <td class="col-md-2">
-              <input type="text" class="form-control" name="" />
-          </td>
-        </tr>
-        <tr class="row">
-          <td class="col-md-4">
-            <label>Participation of Development members:</label>
-          </td>
-          <td class="col-md-2">
-            <select class="form-control" size="2" name="devCount" [(ngModel)]="scrum.devCount">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </td>
-          <td class="col-md-2">
-            <div class="border border-secondary rounded d-flex align-items-center">
-              <input type="text" class="border border-light form-control" name="devPercent" [(ngModel)]="scrum.devPercent" readonly/>
-              <span>%</span>
-            </div>
-          </td>
-          <td class="col-md-2"></td>
-          <td class="col-md-2">
-            <input type="text" class="form-control" name=""/>
-          </td>
-        </tr>
-        <tr class="row">
-          <td class="col-md-4">
-            <label>Attendance of ASPM:</label>
-          </td>
-          <td class="col-md-2">
-            <select class="form-control" size="2" name="aspmCount" [(ngModel)]="scrum.aspmCount">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </td>
-          <td class="col-md-2">
-            <div class="border border-secondary rounded d-flex align-items-center">
-                <input type="text" class="border border-light form-control" name="aspmPercent" [(ngModel)]="scrum.aspmPercent" readonly/>
-                <span>%</span>
-              </div>
-          </td>
-          <td class="col-md-2"></td>
-          <td class="col-md-2">
-            <input type="text" class="form-control" name=""/>
-          </td>
-        </tr>
-        <tr class="row">
-          <td class="col-md-4">
-            <label>Attendance of Asst SM:</label>
-          </td>
-          <td class="col-md-2">
-            <select class="form-control" size="2" name="asmCount" [(ngModel)]="scrum.asmCount">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </td>
-          <td class="col-md-2">
-            <div class="border border-secondary rounded d-flex align-items-center">
-                <input type="text" class="border border-light form-control" name="asmPercent" [(ngModel)]="scrum.asmPercent" readonly/>
-                <span>%</span>
-              </div>
-          </td>
-          <td class="col-md-2"></td>
-          <td class="col-md-2">
-            <input type="text" class="form-control" name=""/>
-          </td>
-        </tr>
-        <tr class="row">
-          <td class="col-md-4">
-            <label>Event time:</label>
-          </td>
-          <td class="col-md-2">
-            <input type="text" class="form-control" name="eventTime" [(ngModel)]="scrum.eventTime"/>
-          </td>
-          <td class="col-md-2 mt-auto mb-auto">
-            <p>M</p>
-          </td>
-          <td class="col-md-2"></td>
-          <td class="col-md-2">
-            <input type="text" class="form-control" name=""/>
-          </td>
-        </tr>
-        <tr class="row">
-          <td class="col-md-4">
-            <label>Number of raised issues:</label>
-          </td>
-          <td class="col-md-2">
-            <select class="form-control" size="2" name="issuesRaised" [(ngModel)]="scrum.issuesRaised">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </td>
-          <td class="col-md-2"></td>
-          <td class="col-md-2"></td>
-          <td class="col-md-2">
-            <input type="text" class="form-control" name=""/>
-          </td>
-        </tr>
-        <tr class="row">
-          <td class="col-md-4">
-            <label>Pair Programming</label>
-          </td>
-          <td class="col-md-2">
-            <select class="form-control" size="2" name="noOfPairs" [(ngModel)]="scrum.noOfPairs">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>  
-          </td>
-          <td class="col-md-2">
-            <div class="border border-secondary rounded d-flex align-items-center">
-                <input type="text" class="border border-light form-control" name="pairPercent" [(ngModel)]="scrum.pairPercent" readonly />
-                <span>%</span>
-              </div>
-          </td>
-          <td class="col-md-2"></td>
-          <td class="col-md-2">
-            <input type="text" class="form-control" name=""/>
-          </td>
-        </tr>
-        <tr class="row">
-            <td class="col-md-4">Comments:</td>
-            <td class="col-md-6">
-                <textarea class="form-control" name="comment" [(ngModel)]="scrum.comment" rows=3></textarea>
-            </td>
-            <td></td>
-        </tr>
-        <tr class="row">
+      <form action="#" (submit)="submit(scrumForm)" #scrumForm="ngForm">
+        <table>
+          <tr class="row">
             <td class="col-md-4"></td>
-            <td class="col-md-2">
-                <input type="reset" value="Clear" class="btn btn-warning"/>
+            <td class="col-md-2"></td>
+            <td class="col-md-2"></td>
+            <td class="col-md-4 text-start">Avarage during the sprint</td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-4">
+              <label>Number of work in process task:</label>
             </td>
             <td class="col-md-2">
-                <input type="submit" value="Update" class="btn btn-warning"/>
+              <select class="form-control" size="2" name="noOfTasks" [(ngModel)]="scrum && scrum.noOfTasks">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </td>
+            <td class="col-md-2">
+            </td>
+            <td class="col-md-2">
+              <input type="text" class="form-control" name="sprintNoOfTasks" [(ngModel)]="sprintScrumSummary.sprintNoOfTasks" readonly />
+            </td>
+            <td class="col-md-2">
+
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-4">
+              <label>Participation of Development members:</label>
+            </td>
+            <td class="col-md-2">
+              <select class="form-control" size="2" name="devCount" [(ngModel)]="scrum && scrum.devCount"
+                (blur)="calDevPercent()">
+                <option *ngFor="let value of devCounter();index as i" value="{{i+1}}">{{i+1}}</option>
+              </select>
+            </td>
+            <td class="col-md-2">
+              <div class="border border-secondary rounded d-flex align-items-center">
+                <input type="text" class="border border-light form-control" name="devPercent"
+                  [(ngModel)]="scrum && scrum.devPercent" readonly />
+                <span>%</span>
+              </div>
+            </td>
+            <td class="col-md-2">
+              <input type="text" class="form-control" name="sprintDevCount" [(ngModel)]="sprintScrumSummary.sprintDevCount" readonly />
+            </td>
+            <td class="col-md-2 d-flex align-items-center">
+              <input type="text" class="form-control" name="sprintDevPercent" [(ngModel)]="sprintScrumSummary.sprintDevPercent" readonly />
+              <span>%</span>
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-4">
+              <label>Attendance of ASPM:</label>
+            </td>
+            <td class="col-md-2">
+              <select class="form-control" size="2" name="aspmCount" [(ngModel)]="scrum && scrum.aspmCount"
+                (blur)="calAspmPercent()">
+                <option *ngFor="let value of aspmCounter();index as i" value="{{i+1}}">{{i+1}}</option>
+              </select>
+            </td>
+            <td class="col-md-2">
+              <div class="border border-secondary rounded d-flex align-items-center">
+                <input type="text" class="border border-light form-control" name="aspmPercent"
+                  [(ngModel)]="scrum && scrum.aspmPercent" readonly />
+                <span>%</span>
+              </div>
+            </td>
+            <td class="col-md-2">
+              <input type="text" class="form-control" name="sprintAspmCount" [(ngModel)]="sprintScrumSummary.sprintAspmCount" readonly />
+            </td>
+            <td class="col-md-2 d-flex align-items-center">
+              <input type="text" class="form-control" name="sprintAspmPercent" [(ngModel)]="sprintScrumSummary.sprintAspmPercent"
+                readonly />
+              <span>%</span>
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-4">
+              <label>Attendance of Asst SM:</label>
+            </td>
+            <td class="col-md-2">
+              <select class="form-control" size="2" name="asmCount" [(ngModel)]="scrum && scrum.asmCount"
+                (blur)="calAsmPercent()">
+                <option *ngFor="let value of asmCounter();index as i" value="{{i+1}}">{{i+1}}</option>
+              </select>
+            </td>
+            <td class="col-md-2">
+              <div class="border border-secondary rounded d-flex align-items-center">
+                <input type="text" class="border border-light form-control" name="asmPercent"
+                  [(ngModel)]="scrum && scrum.asmPercent" readonly />
+                <span>%</span>
+              </div>
+            </td>
+            <td class="col-md-2">
+              <input type="text" class="form-control" name="sprintAsmCount" [(ngModel)]="sprintScrumSummary.sprintAsmCount" readonly />
+            </td>
+            <td class="col-md-2 d-flex align-items-center">
+              <input type="text" class="form-control" name="sprintAsmPercent" [(ngModel)]="sprintScrumSummary.sprintAsmPercent"
+                readonly />
+              <span>%</span>
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-4">
+              <label>Event time:</label>
+            </td>
+            <td class="col-md-2">
+              <input type="text" class="form-control" name="eventTime" [(ngModel)]="scrum && scrum.eventTime" />
+            </td>
+            <td class="col-md-2 mt-auto mb-auto">
+              <p>M</p>
+            </td>
+            <td class="col-md-2 d-flex align-items-center">
+              <input type="text" class="form-control" name="sprintEventTime" [(ngModel)]="sprintScrumSummary.sprintEventTime"  readonly/>
+              <p>M</p>
+            </td>
+            <td class="col-md-2">
+              
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-4">
+              <label>Number of raised issues:</label>
+            </td>
+            <td class="col-md-2">
+              <select class="form-control" size="2" name="issuesRaised" [(ngModel)]="scrum && scrum.issuesRaised">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
             </td>
             <td class="col-md-2"></td>
-        </tr>
-      </table>
+            <td class="col-md-2 d-flex align-items-center">
+              <input type="text" class="form-control" name="sprintIssuesRaised" [(ngModel)]="sprintScrumSummary.sprintIssuesRaised"  readonly/>
+              <p>M</p>
+            </td>
+            <td class="col-md-2">
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-4">
+              <label>Pair Programming</label>
+            </td>
+            <td class="col-md-2">
+              <select class="form-control" size="2" name="noOfPairs" [(ngModel)]="scrum && scrum.noOfPairs">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </td>
+            <td class="col-md-2">
+              <div class="border border-secondary rounded d-flex align-items-center">
+                <input type="text" class="border border-light form-control" name="pairPercent"
+                  [(ngModel)]="scrum && scrum.pairPercent" readonly />
+                <span>%</span>
+              </div>
+            </td>
+            <td class="col-md-2">
+              <input type="text" class="form-control" name="sprintPairCount" [(ngModel)]="sprintScrumSummary.sprintPairCount" readonly />
+            </td>
+            <td class="col-md-2 d-flex align-items-center">
+              <input type="text" class="form-control" name="sprintPairPercent" [(ngModel)]="sprintScrumSummary.sprintPairPercent"
+                readonly />
+              <span>%</span>
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-4">Comments:</td>
+            <td class="col-md-6">
+              <textarea class="form-control" name="comment" [(ngModel)]="scrum && scrum.comment" rows=3></textarea>
+            </td>
+            <td></td>
+          </tr>
+          <tr class="row">
+            <td class="col-md-4"></td>
+            <td class="col-md-2">
+              <input type="reset" value="Clear" class="btn btn-warning" />
+            </td>
+            <td class="col-md-2">
+              <input type="submit" value="Update" class="btn btn-warning" />
+            </td>
+            <td class="col-md-2"></td>
+          </tr>
+        </table>
+      </form>
     </div>
   </div>
 </div>

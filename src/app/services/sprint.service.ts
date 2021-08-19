@@ -10,26 +10,21 @@ import { Sprint } from '../model/sprint';
 export class SprintService {
 
   static URL = 'http://localhost:8084/api/sprint';
-  
-  sprint?: Sprint
-  sprintSelected: Subject<Sprint> = new Subject<Sprint>();
 
+  currentSprint: Subject<Sprint> = new Subject<Sprint>();
+  
   constructor(private httpClient: HttpClient) { }
 
 
-  getSprint(projectId: string, date: string): Observable<Sprint>{
-    const sprintDate = new Date(date);
-    const dateFormat = sprintDate.getDate()+"-"+(sprintDate.getMonth()+1)+"-"+sprintDate.getFullYear();
-    return this.httpClient.get<Sprint>(SprintService.URL+'/search/project/'+projectId+'/sprint-date/'+ dateFormat)
-            .pipe(
-              tap(sprint => {
-                 this.sprint = sprint;
-              })
-            )
-  }
-
-  selectSprint() {
-
+  getCurrentScrum(projectId: string): Observable<Sprint> {
+      const currentDate = new Date();
+      const date = currentDate.getDate()+'-'+(currentDate.getMonth()+1)+'-'+currentDate.getFullYear();
+      return this.httpClient.get<Sprint>(SprintService.URL+'/project/'+projectId+'/sprint-date/'+date)
+      .pipe(
+        tap(sprint =>{
+           this.currentSprint.next(sprint);
+        })
+      )
   }
 
 }

@@ -10,28 +10,12 @@ import { Project } from '../model/project';
 export class ProjectService {
 
   static URL: string = 'http://localhost:8084/api/project';
-  private projectList: Project[];
-  public selectedProject: Subject<Project> = new Subject<Project>();
 
   constructor(private httpClient: HttpClient) { 
-    this.projectList=[];
   }
 
-  getProjects(): Observable<Project[]> {
-    return this.httpClient.get<Project[]>(ProjectService.URL)
-    .pipe(
-      tap(list=>{
-        this.projectList = list;
-      })
-    );
+  getProject(projectId: string): Observable<Project> {
+    return this.httpClient.get<Project>(ProjectService.URL+'/'+projectId);
   }
-
-
-  selectProject(id: string){
-    const selectedPro = this.projectList.find(project => project.projectId==id);
-    if(selectedPro!=undefined){
-      this.selectedProject.next(selectedPro);
-    }
-  }
-
+  
 }

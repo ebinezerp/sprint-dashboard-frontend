@@ -21,26 +21,10 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   this.projectService.getProjects().subscribe(
-     (data) => {
-       this.projectList = data;
-     },
-     (error) =>{
-        console.log(error);
-     }
-   )
   }
 
 
   search(form:NgForm){
-    this.projectService.selectProject(form.value.projectId);
-    this.sprintService.getSprint(form.value.projectId,form.value.sprintDate)
-    .subscribe(
-      (sprint) => {
-        this.sprintService.sprintSelected.next(sprint);
-      }
-      
-    )
   }
 
 }

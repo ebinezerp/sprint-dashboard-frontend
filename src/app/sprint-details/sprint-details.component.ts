@@ -28,42 +28,25 @@ export class SprintDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.projectService.selectedProject.subscribe(
-      (project) =>{
-        if(project.projectId!=undefined){
-          this.userService.getProjectUsers(project.projectId).subscribe(
-            (users) => {
-              this.userList = users;
-              this.getScrumMasterCount();
-              this.getDevelopmentMembersCount();
-              this.getPairCount();
-            }
-          )
-        }
-      }
-    );
-
-    this.sprintService.sprintSelected.subscribe(
-      (sprint: Sprint)=> {
-        console.log(sprint);
-          this.sprint = sprint;
+    /**
+     * considering project -1 by default
+     */
+     this.userService.getProjectUsers('1').subscribe(
+      (users) => {
+        this.userList = users;
+        this.scrumMasterCount = this.userService.getScrumMasterCount();
+        this.developmentMembers = this.userService.getDevelopmentMembersCount();
+        this.pairCount = this.userService.getPairCount();
       }
     )
+
+     this.sprintService.getCurrentScrum('1').subscribe(
+       (sprint: Sprint) => {
+         this.sprint = sprint;
+       }
+     )
+
   }
 
-
-  getScrumMasterCount(): void {
-     this.scrumMasterCount = this.userList
-    .filter(user => user.projectRole == ProjectRole.SCRUM_MASTER)
-    .length;
-  }
-
-  getDevelopmentMembersCount() {
-    this.developmentMembers = this.userList.filter(user => user.projectRole == ProjectRole.DEVELOPER).length;
-  }
-
-  getPairCount(){
-    this.pairCount = this.developmentMembers/2;
-  }
 
 }
