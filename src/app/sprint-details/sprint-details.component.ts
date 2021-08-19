@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectRole } from '../model/project-role';
+import { Sprint } from '../model/sprint';
 import { User } from '../model/user';
 import { ProjectService } from '../services/project.service';
+import { SprintService } from '../services/sprint.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -14,10 +16,14 @@ export class SprintDetailsComponent implements OnInit {
   userList: User[];
   scrumMasterCount = 0;
   developmentMembers = 0;
+  pairCount=0;
+  sprint?:Sprint;
+
 
   constructor(
     private projectService: ProjectService,
-    private userService: UserService) { 
+    private userService: UserService,
+    private sprintService: SprintService) { 
     this.userList = [];
   }
 
@@ -30,9 +36,17 @@ export class SprintDetailsComponent implements OnInit {
               this.userList = users;
               this.getScrumMasterCount();
               this.getDevelopmentMembersCount();
+              this.getPairCount();
             }
           )
         }
+      }
+    );
+
+    this.sprintService.sprintSelected.subscribe(
+      (sprint: Sprint)=> {
+        console.log(sprint);
+          this.sprint = sprint;
       }
     )
   }
@@ -46,6 +60,10 @@ export class SprintDetailsComponent implements OnInit {
 
   getDevelopmentMembersCount() {
     this.developmentMembers = this.userList.filter(user => user.projectRole == ProjectRole.DEVELOPER).length;
+  }
+
+  getPairCount(){
+    this.pairCount = this.developmentMembers/2;
   }
 
 }
