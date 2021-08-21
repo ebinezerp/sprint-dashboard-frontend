@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { DailyScrum } from '../model/daily-scrum';
+import { Sprint } from '../model/sprint';
 import { SprintScrumSummary } from '../model/sprint-scrum-summary';
 import { DailyScrumService } from './daily-scrum.service';
 import { SprintService } from './sprint.service';
@@ -10,39 +12,80 @@ import { SprintService } from './sprint.service';
 export class SprintScrumSummaryService {
 
 
-  sprintScrums: DailyScrum[] = [];
-  
+  sprintScrums: DailyScrum[] =[];
+
+  sprintScrumSummaryObservable: Subject<SprintScrumSummary>  = new Subject<SprintScrumSummary>();
+  currentScurmObservable: Subject<DailyScrum> = new Subject<DailyScrum>();
+
   constructor(
-    private sprintService:SprintService,
-    private dailyScrumService: DailyScrumService
+    private sprintService:SprintService
     ) {
     this.sprintService.currentSprint.subscribe(
       (sprint) => {
-        this.dailyScrumService.getSprintScrums(sprint.sprintId).subscribe(
-          (dailyScrums)=>{
-            this.sprintScrums = dailyScrums;
-          }
-        )
+        if(sprint.dailyScrumList!= undefined){
+          this.sprintScrums = sprint.dailyScrumList;
+          this.sprintScrums.push(new DailyScrum());
+          this.currentScurmObservable.next(this.getCurrentScrum());
+          this.updateSprintCurrentSummary();
+        }
       }
-    )
+    );
   }
 
-  getSprintScrumSummary(): SprintScrumSummary {
-    const sprintScrumSummary = new SprintScrumSummary();
+  getCurrentScrum(): DailyScrum {
+    return this.sprintScrums[this.sprintScrums.length-1];
+  }
+
+  replaceCurrentScrum(scrum:DailyScrum ): void {
+    this.sprintScrums[this.sprintScrums.length-1] = scrum;
+    this.currentScurmObservable.next(scrum);
+  }
+
+  updateSprintCurrentSummary(){
+    this.sprintScrumSummaryObservable.next(this.getSprintScrumSummary());
+  }
+
+  getSprintScrumSummary():SprintScrumSummary {  
+    let totalNoOfTasks = 0;  
+    let totalDevCount = 0;
+    let totalDevPercent = 0;
+    let totalAspmCount = 0;
+    let totalAspmPercent = 0;
+    let totalAsmCount = 0;
+    let totalAsmPercent = 0;
+    let totalEventTime = 0;
+    let totalIssuesRaised = 0;
+    let totalPairCount = 0;
+    let totalPairPercent = 0;
 
     for(let sprint of this.sprintScrums){
-      sprintScrumSummary.sprintDevCount = this.add(sprintScrumSummary.sprintDevCount,sprint.devCount);
-      sprintScrumSummary.sprintDevPercent = this.add(sprintScrumSummary.sprintDevPercent,sprint.devPercent);
-      sprintScrumSummary.sprintAspmCount = this.add(sprintScrumSummary.sprintAspmCount,sprint.aspmCount);
-      sprintScrumSummary.sprintAspmPercent = this.add(sprintScrumSummary.sprintAspmPercent,sprint.aspmPercent);
-      sprintScrumSummary.sprintAsmCount = this.add(sprintScrumSummary.sprintAsmCount,sprint.asmCount);
-      sprintScrumSummary.sprintAsmPercent = this.add(sprintScrumSummary.sprintAsmPercent,sprint.asmPercent);
-      sprintScrumSummary.sprintEventTime = this.add(sprintScrumSummary.sprintEventTime,sprint.eventTime);
-      sprintScrumSummary.sprintIssuesRaised = this.add(sprintScrumSummary.sprintIssuesRaised,sprint.issuesRaised);
-      sprintScrumSummary.sprintNoOfTasks = this.add(sprintScrumSummary.sprintNoOfTasks,sprint.noOfTasks);
-      sprintScrumSummary.sprintPairCount = this.add(sprintScrumSummary.sprintPairCount,sprint.noOfPairs);
-      sprintScrumSummary.sprintPairPercent = this.add(sprintScrumSummary.sprintPairPercent,sprint.pairPercent);
+      totalNoOfTasks = this.add(totalNoOfTasks,sprint.noOfTasks);
+      totalDevCount = this.add(totalDevCount,sprint.devCount);
+      totalDevPercent = this.add(totalDevPercent,sprint.devPercent);
+      totalAspmCount = this.add(totalAspmCount,sprint.aspmCount);
+      totalAspmPercent = this.add(totalAspmPercent,sprint.aspmPercent);
+      totalAsmCount = this.add(totalAsmCount,sprint.asmCount);
+      totalAsmPercent = this.add(totalAsmPercent,sprint.asmPercent);
+      totalEventTime = this.add(totalEventTime,sprint.eventTime);
+      totalIssuesRaised = this.add(totalIssuesRaised,sprint.issuesRaised);
+      totalPairCount = this.add(totalPairCount,sprint.noOfPairs);
+      totalPairPercent = this.add(totalPairPercent,sprint.pairPercent);
     }
+
+
+    const sprintScrumSummary = new SprintScrumSummary();
+    sprintScrumSummary.sprintNoOfTasksAvg = this.getAvarage(totalNoOfTasks);
+    sprintScrumSummary.sprintDevCountAvg = this.getAvarage(totalDevCount);
+    sprintScrumSummary.sprintDevPercentAvg = this.getAvarage(totalDevPercent);
+    sprintScrumSummary.sprintAspmCountAvg = this.getAvarage(totalAspmCount);
+    sprintScrumSummary.sprintAspmPercentAvg = this.getAvarage(totalAspmPercent)
+    sprintScrumSummary.sprintAsmCountAvg = this.getAvarage(totalAsmCount);
+    sprintScrumSummary.sprintAsmPercentAvg = this.getAvarage(totalAsmPercent);
+    sprintScrumSummary.sprintEventTimeAvg = this.getAvarage(totalEventTime);
+    sprintScrumSummary.sprintIssuesRaisedAvg = this.getAvarage(totalIssuesRaised);
+    sprintScrumSummary.sprintPairCountAvg = this.getAvarage(totalPairCount);
+    sprintScrumSummary.sprintPairPercentAvg = this.getAvarage(totalPairPercent);
+    
     return sprintScrumSummary;
   }
 
@@ -53,6 +96,14 @@ export class SprintScrumSummaryService {
       perviousValue += 0;
     }
     return perviousValue;
+  }
+
+  getAvarage(value: number) {
+    if(value==0){
+      return value;
+    }else{
+      return Math.trunc(value/this.sprintScrums.length);
+    }
   }
 
 }

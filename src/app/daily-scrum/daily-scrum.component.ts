@@ -4,9 +4,7 @@ import { Event, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { DailyScrum } from '../model/daily-scrum';
 import { SprintScrumSummary } from '../model/sprint-scrum-summary';
 import { User } from '../model/user';
-import { DailyScrumService } from '../services/daily-scrum.service';
 import { SprintScrumSummaryService } from '../services/sprint-scrum-summary.service';
-import { SprintService } from '../services/sprint.service';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -29,21 +27,20 @@ export class DailyScrumComponent implements OnInit {
     private sprintScrumSummaryService: SprintScrumSummaryService,
     private router: Router
     ) {
-      const scrumStr = sessionStorage.getItem('scrum');
-      if(scrumStr != null){
-        this.scrum = JSON.parse(scrumStr);
-      }else{
-        this.scrum = new DailyScrum();
-      }
-      this.router.events.subscribe(
-        (event: Event) => {
-            if(event instanceof NavigationStart){
-              if(this.scrum!= undefined){
-                sessionStorage.setItem('scrum', JSON.stringify(this.scrum));
-              }
+  
+    this.scrum = new DailyScrum();
+
+    this.router.events.subscribe(
+      (event: Event) => {
+          if(event instanceof NavigationStart){
+            if(this.scrum!= undefined){
+              console.log(this.scrum);
+              sessionStorage.setItem('scrum', JSON.stringify(this.scrum));
+              sessionStorage.setItem('sprintScrumSummary',JSON.stringify(this.sprintScrumSummary));
             }
-        }
-      )
+          }
+      }
+    )
       this.sprintScrumSummary = new SprintScrumSummary();
       this.actualSprintScrumSummary = this.sprintScrumSummary.clone();
   }
@@ -58,7 +55,30 @@ export class DailyScrumComponent implements OnInit {
       } 
     );
 
-    this.sprintScrumSummary = this.sprintScrumSummaryService.getSprintScrumSummary();
+    const scrumStr = sessionStorage.getItem('scrum');
+    if(scrumStr != null){
+      this.scrum = JSON.parse(scrumStr);
+      this.sprintScrumSummaryService.replaceCurrentScrum(this.scrum);
+    }else{
+      this.sprintScrumSummaryService.currentScurmObservable.subscribe(
+        (scrum)=> {
+          this.scrum = scrum;
+        }
+      )
+    }
+
+    const sprintScrumSummaryStr = sessionStorage.getItem('sprintScrumSummary');
+    if(sprintScrumSummaryStr!=null){
+      this.sprintScrumSummary = JSON.parse(sprintScrumSummaryStr);
+    }
+    
+    this.sprintScrumSummaryService.sprintScrumSummaryObservable.subscribe(
+      (sprintScrumSummary) => {
+        console.log('hello');
+        this.sprintScrumSummary = sprintScrumSummary;
+      }
+    )
+
 
   }
 
@@ -76,13 +96,12 @@ export class DailyScrumComponent implements OnInit {
 
   calDevPercent(){
     let devCount = this.scrum.devCount;
-    if( devCount != undefined){
+    if(devCount != undefined){
       this.scrum.devPercent = (devCount *100)/this.devTotalCount;
-      this.sprintScrumSummary.sprintDevCount = this.sprintScrumSummary.sprintDevCount + devCount;
-      this.sprintScrumSummary.sprintDevPercent = (this.sprintScrumSummary.)
     }else{
       this.scrum.devPercent = 0;
     }
+    this.sprintScrumSummaryService.updateSprintCurrentSummary();
   }
 
 
@@ -93,6 +112,7 @@ export class DailyScrumComponent implements OnInit {
     }else{
       this.scrum.aspmPercent = 0;
     }
+    this.sprintScrumSummaryService.updateSprintCurrentSummary();
   }
 
   calAsmPercent() {
@@ -102,6 +122,7 @@ export class DailyScrumComponent implements OnInit {
     }else{
       this.scrum.asmPercent = 0;
     }
+    this.sprintScrumSummaryService.updateSprintCurrentSummary();
   }
 
 

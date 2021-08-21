@@ -1,32 +1,31 @@
-import { SprintScrumSummaryService } from "../services/sprint-scrum-summary.service";
 
 
 export class SprintScrumSummary {
-  sprintNoOfTasks=0;
-  sprintDevCount =0;
-  sprintDevPercent=0;
-  sprintAspmCount=0;
-  sprintAspmPercent=0;
-  sprintAsmCount = 0;
-  sprintAsmPercent = 0;
-  sprintEventTime = 0;
-  sprintIssuesRaised = 0;
-  sprintPairCount = 0;
-  sprintPairPercent = 0;
+  sprintNoOfTasksAvg=0;
+  sprintDevCountAvg =0;
+  sprintDevPercentAvg=0;
+  sprintAspmCountAvg=0;
+  sprintAspmPercentAvg=0;
+  sprintAsmCountAvg = 0;
+  sprintAsmPercentAvg = 0;
+  sprintEventTimeAvg = 0;
+  sprintIssuesRaisedAvg = 0;
+  sprintPairCountAvg = 0;
+  sprintPairPercentAvg = 0;
 
   clone(): SprintScrumSummary {
     const newOne = new SprintScrumSummary();
-    newOne.sprintNoOfTasks = this.sprintNoOfTasks;
-    newOne.sprintDevCount = this.sprintDevCount;
-    newOne.sprintDevPercent = this.sprintDevPercent;
-    newOne.sprintAspmCount = this.sprintAspmCount;
-    newOne.sprintAspmPercent = this.sprintAspmPercent;
-    newOne.sprintAsmCount = this.sprintAsmCount;
-    newOne.sprintAsmPercent = this.sprintAsmPercent;
-    newOne.sprintEventTime = this.sprintEventTime;
-    newOne.sprintIssuesRaised = this.sprintIssuesRaised;
-    newOne.sprintPairCount = this.sprintPairCount;
-    newOne.sprintPairPercent = this.sprintPairPercent;
+    newOne.sprintNoOfTasksAvg = this.sprintNoOfTasksAvg;
+    newOne.sprintDevCountAvg = this.sprintDevCountAvg;
+    newOne.sprintDevPercentAvg = this.sprintDevPercentAvg;
+    newOne.sprintAspmCountAvg = this.sprintAspmCountAvg;
+    newOne.sprintAspmPercentAvg = this.sprintAspmPercentAvg;
+    newOne.sprintAsmCountAvg = this.sprintAsmCountAvg;
+    newOne.sprintAsmPercentAvg = this.sprintAsmPercentAvg;
+    newOne.sprintEventTimeAvg = this.sprintEventTimeAvg;
+    newOne.sprintIssuesRaisedAvg = this.sprintIssuesRaisedAvg;
+    newOne.sprintPairCountAvg = this.sprintPairCountAvg;
+    newOne.sprintPairPercentAvg = this.sprintPairPercentAvg;
     return newOne;
   }
 }

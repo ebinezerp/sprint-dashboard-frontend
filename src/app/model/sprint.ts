@@ -1,3 +1,4 @@
+import { DailyScrum } from "./daily-scrum";
 import { Project } from "./project";
 
 export class Sprint {
@@ -14,4 +15,5 @@ export class Sprint {
     developmentWorkTime?: number;
     comment?: string;
     project?: Project;
+    dailyScrumList?: DailyScrum[];
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProjectRole } from '../model/project-role';
 import { Sprint } from '../model/sprint';
 import { User } from '../model/user';
@@ -17,11 +17,10 @@ export class SprintDetailsComponent implements OnInit {
   scrumMasterCount = 0;
   developmentMembers = 0;
   pairCount=0;
-  sprint?:Sprint;
+  @Input() sprint?:Sprint;
 
 
   constructor(
-    private projectService: ProjectService,
     private userService: UserService,
     private sprintService: SprintService) { 
     this.userList = [];
@@ -39,13 +38,6 @@ export class SprintDetailsComponent implements OnInit {
         this.pairCount = this.userService.getPairCount();
       }
     )
-
-     this.sprintService.getCurrentScrum('1').subscribe(
-       (sprint: Sprint) => {
-         this.sprint = sprint;
-       }
-     )
-
   }
 
 
