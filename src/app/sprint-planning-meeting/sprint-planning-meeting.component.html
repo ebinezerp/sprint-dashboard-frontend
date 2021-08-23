@@ -3,14 +3,15 @@
   <app-sprint-details></app-sprint-details>
   <div class="card">
     <div class="card-text">
+      <form (submit)="submit(sprintPlanningForm)" #sprintPlanningForm="ngForm">
       <div class="row">
         <div class="col-md-4">
           <p>Attendance of PO:</p>
         </div>
         <div class="col-md-2">
-          <select class="form-control">
-            <option>Present</option>
-            <option>Absent</option>
+          <select class="form-control" name="poParticipation" [(ngModel)]="sprintPlanning.poParticipation">
+            <option value="true">Present</option>
+            <option value="false">Absent</option>
           </select>
         </div>
         <div class="col-md-2"></div>
@@ -20,18 +21,16 @@
           <p>Participation of development members:</p>
         </div>
         <div class="col-md-2">
-          <select class="form-control">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
+          <select class="form-control" size="2" name="devCount" [(ngModel)]="sprintPlanning.devCount"
+                (blur)="calDevPercent()">
+                <option value="0" selected>0</option>
+                <option *ngFor="let value of devCounter;index as i" value="{{i+1}}">{{i+1}}</option>
+              </select>
         </div>
         <div class="col-md-2">
-          <div class="row border border-secondary rounded d-flex flex-row align-items-center">
-            <input type="text" class="col-md-8 form-control border border-light" readonly="readonly" />
-            <span class="col-md-1">%</span>
+          <div class="rounded d-flex flex-row align-items-center">
+            <input type="text" name="devPercent" [(ngModel)]="sprintPlanning.devPercent" class="form-control" readonly="readonly" />
+            <span>%</span>
           </div>
         </div>
       </div>
@@ -40,19 +39,17 @@
           <p>Attendance of ASPM:</p>
         </div>
         <div class="col-md-2">
-          <select class="form-control">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
+          <select class="form-control" size="2" name="aspmCount" [(ngModel)]="sprintPlanning.aspmCount"
+          (blur)="calAspmPercent()">
+          <option value="0" selected>0</option>
+          <option *ngFor="let value of aspmCounter;index as i" value="{{i+1}}">{{i+1}}</option>
+        </select>
         </div>
         <div class="col-md-2">
-          <div class="row border border-secondary rounded d-flex flex-row align-items-center">
-            <input type="text" class="col-md-8 form-control border border-light" readonly="readonly" />
-            <span class="col-md-1">%</span>
-          </div>
+            <div class="rounded d-flex flex-row align-items-center">
+              <input type="text" name="aspmPercent" [(ngModel)]="sprintPlanning.aspmPercent" class="form-control" readonly="readonly" />
+              <span>%</span>
+            </div>
         </div>
       </div>
       <div class="row">
@@ -60,18 +57,16 @@
           <p>Attendance of Asst. SM:</p>
         </div>
         <div class="col-md-2">
-          <select class="form-control">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
+          <select class="form-control" size="2" name="asmCount" [(ngModel)]="sprintPlanning.asmCount"
+                (blur)="calAsmPercent()">
+                <option value="0" selected>0</option>
+                <option *ngFor="let value of asmCounter;index as i" value="{{i+1}}">{{i+1}}</option>
+              </select>
         </div>
         <div class="col-md-2">
-          <div class="row border border-secondary rounded d-flex flex-row align-items-center">
-            <input type="text" class="col-md-8 form-control border border-light" readonly="readonly" />
-            <span class="col-md-1">%</span>
+          <div class="rounded d-flex flex-row align-items-center">
+            <input type="text" name="asmPercent" [(ngModel)]="sprintPlanning.asmPercent" class="form-control" readonly="readonly" />
+            <span>%</span>
           </div>
         </div>
       </div>
@@ -80,15 +75,16 @@
           <p>Event Time:</p>
         </div>
         <div class="col-md-2">
-          <select class="form-control">
-            <option>0.5</option>
-            <option>1</option>
-            <option>1.5</option>
-            <option>2</option>
-            <option>2.5</option>
-            <option>3</option>
-            <option>3.5</option>
-            <option>4</option>
+          <select class="form-control" name="eventTime" [(ngModel)]="sprintPlanning.eventTime">
+            <option value="0">0</option>
+            <option value="0.5">0.5</option>binding
+            <option value="1">1</option>
+            <option value="1.5">1.5</option>
+            <option value="2">2</option>
+            <option value="2.5">2.5</option>
+            <option value="3">3</option>
+            <option value="3.5">3.5</option>
+            <option value="4">4</option>
           </select>
         </div>
         <div class="col-md-1 p-0 pt-2 align-self-center">
@@ -100,7 +96,7 @@
           <label class="align-center">Comments:</label>
         </div>
         <div class="col-md-6">
-          <textarea class="form-control" rows=3></textarea>
+          <textarea class="form-control" [(ngModel)]="sprintPlanning.comment" rows="3"></textarea>
         </div>
       </div>
       <div class="row">
@@ -111,6 +107,7 @@
             <input type="submit" value="Update" class="form-control btn btn-warning"/>
         </div>
       </div>
+      </form>
     </div>
   </div>
 </div>
