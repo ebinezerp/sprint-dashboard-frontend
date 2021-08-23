@@ -40,7 +40,7 @@ export class UserService {
  }
 
  getPairCount(): number {
-   return this.getDevelopmentMembersCount()/2;
+   return Math.trunc(this.getDevelopmentMembersCount()/2);
  }
 
  getAspmTotalCount(): number {

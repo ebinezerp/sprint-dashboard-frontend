@@ -13,6 +13,7 @@ export class SprintScrumSummaryService {
 
 
   sprintScrums: DailyScrum[] =[];
+  sprintScrumSummary?: SprintScrumSummary;
 
   sprintScrumSummaryObservable: Subject<SprintScrumSummary>  = new Subject<SprintScrumSummary>();
   currentScurmObservable: Subject<DailyScrum> = new Subject<DailyScrum>();
@@ -24,8 +25,10 @@ export class SprintScrumSummaryService {
       (sprint) => {
         if(sprint.dailyScrumList!= undefined){
           this.sprintScrums = sprint.dailyScrumList;
-          this.sprintScrums.push(new DailyScrum());
+          let dailyScrum = new DailyScrum();
+          this.sprintScrums.push(dailyScrum);
           this.currentScurmObservable.next(this.getCurrentScrum());
+          this.getSprintScrumSummary();
           this.updateSprintCurrentSummary();
         }
       }
@@ -41,11 +44,17 @@ export class SprintScrumSummaryService {
     this.currentScurmObservable.next(scrum);
   }
 
-  updateSprintCurrentSummary(){
-    this.sprintScrumSummaryObservable.next(this.getSprintScrumSummary());
+  replaceSprintScrumSummary(sprintScrumSummary: SprintScrumSummary){
+    this.sprintScrumSummary = sprintScrumSummary;
+    this.sprintScrumSummaryObservable.next(this.sprintScrumSummary);
   }
 
-  getSprintScrumSummary():SprintScrumSummary {  
+  updateSprintCurrentSummary(){
+    this.getSprintScrumSummary();
+    this.sprintScrumSummaryObservable.next(this.sprintScrumSummary);
+  }
+
+  getSprintScrumSummary() {  
     let totalNoOfTasks = 0;  
     let totalDevCount = 0;
     let totalDevPercent = 0;
@@ -86,7 +95,7 @@ export class SprintScrumSummaryService {
     sprintScrumSummary.sprintPairCountAvg = this.getAvarage(totalPairCount);
     sprintScrumSummary.sprintPairPercentAvg = this.getAvarage(totalPairPercent);
     
-    return sprintScrumSummary;
+    this.sprintScrumSummary = sprintScrumSummary;
   }
 
   add(perviousValue: number,currentValue: number|undefined){

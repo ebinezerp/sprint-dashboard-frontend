@@ -4,6 +4,7 @@ import { Event, NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { DailyScrum } from '../model/daily-scrum';
 import { SprintScrumSummary } from '../model/sprint-scrum-summary';
 import { User } from '../model/user';
+import { DailyScrumService } from '../services/daily-scrum.service';
 import { SprintScrumSummaryService } from '../services/sprint-scrum-summary.service';
 import { UserService } from '../services/user.service';
 
@@ -19,12 +20,18 @@ export class DailyScrumComponent implements OnInit {
   devTotalCount=0;
   aspmTotalCount=0;
   asmTotalCount=0;
+  pairTotalCount=0;
+  devCounter:any[]=[];
+  aspmCounter:any[]=[];
+  asmCounter:any[]=[];
+  pairCounter:any[]=[]
   sprintScrumSummary: SprintScrumSummary;
   actualSprintScrumSummary: SprintScrumSummary;
   
   constructor(
     private userService: UserService,
     private sprintScrumSummaryService: SprintScrumSummaryService,
+    private dailyScrumService: DailyScrumService,
     private router: Router
     ) {
   
@@ -50,8 +57,13 @@ export class DailyScrumComponent implements OnInit {
       (users) => {
         this.usersList = users;
         this.devTotalCount = this.userService.getDevelopmentMembersCount();
+        this.devCounter = new Array(this.devTotalCount);
         this.aspmTotalCount = this.userService.getAspmTotalCount();
+        this.aspmCounter = new Array(this.aspmTotalCount);
         this.asmTotalCount = this.userService.getAsmTotalCount();
+        this.asmCounter = new Array(this.asmTotalCount);
+        this.pairTotalCount = this.userService.getPairCount();
+        this.pairCounter = new Array(this.pairTotalCount);
       } 
     );
 
@@ -67,32 +79,20 @@ export class DailyScrumComponent implements OnInit {
       )
     }
 
+    this.sprintScrumSummaryService.sprintScrumSummaryObservable.subscribe(
+      (sprintScrumSummary) => {
+        this.sprintScrumSummary = sprintScrumSummary;
+        console.log(this.sprintScrumSummary);
+      }
+    )
+
     const sprintScrumSummaryStr = sessionStorage.getItem('sprintScrumSummary');
     if(sprintScrumSummaryStr!=null){
       this.sprintScrumSummary = JSON.parse(sprintScrumSummaryStr);
     }
-    
-    this.sprintScrumSummaryService.sprintScrumSummaryObservable.subscribe(
-      (sprintScrumSummary) => {
-        console.log('hello');
-        this.sprintScrumSummary = sprintScrumSummary;
-      }
-    )
-
 
   }
 
-  devCounter(){
-    return new Array(this.devTotalCount);
-  }
-
-  aspmCounter() {
-    return new Array(this.aspmTotalCount);
-  }
-
-  asmCounter() {
-    return new Array(this.asmTotalCount);
-  }
 
   calDevPercent(){
     let devCount = this.scrum.devCount;
@@ -101,7 +101,7 @@ export class DailyScrumComponent implements OnInit {
     }else{
       this.scrum.devPercent = 0;
     }
-    this.sprintScrumSummaryService.updateSprintCurrentSummary();
+    this.updateCall();
   }
 
 
@@ -112,7 +112,7 @@ export class DailyScrumComponent implements OnInit {
     }else{
       this.scrum.aspmPercent = 0;
     }
-    this.sprintScrumSummaryService.updateSprintCurrentSummary();
+    this.updateCall();
   }
 
   calAsmPercent() {
@@ -122,12 +122,18 @@ export class DailyScrumComponent implements OnInit {
     }else{
       this.scrum.asmPercent = 0;
     }
+    this.updateCall();
+  }
+
+  updateCall(){
     this.sprintScrumSummaryService.updateSprintCurrentSummary();
   }
 
 
   submit(scrumForm: NgForm){
-
+    let scrum: DailyScrum = scrumForm.value;
+    scrum.dailyScrumId = this.scrum.dailyScrumId;
+    this.dailyScrumService.save(scrum).subscribe()
   }
 
 }
