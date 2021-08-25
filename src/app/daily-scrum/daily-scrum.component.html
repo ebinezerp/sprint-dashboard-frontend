@@ -1,5 +1,8 @@
 <div>
   <h1 class="text-center">Daily Scrum</h1>
+  <div>
+    <span *ngIf="message" class="alert alert-success">{{message}}</span>
+  </div>
   <app-sprint-details></app-sprint-details>
   <div class="card">
     <div class="card-text">
@@ -16,7 +19,7 @@
               <label>Number of work in process task:</label>
             </td>
             <td class="col-md-2">
-              <select class="form-control" size="2" name="noOfTasks" [(ngModel)]="scrum.noOfTasks" (blur)="updateCall()">
+              <select class="form-control" size="2" name="noOfTasks" [(ngModel)]="scrum.noOfTasks" (change)="updateCall()">
                 <option value="0" selected>0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -40,7 +43,7 @@
             </td>
             <td class="col-md-2">
               <select class="form-control" size="2" name="devCount" [(ngModel)]="scrum.devCount"
-                (blur)="calDevPercent()">
+                (change)="calDevPercent()">
                 <option value="0" selected>0</option>
                 <option *ngFor="let value of devCounter;index as i" value="{{i+1}}">{{i+1}}</option>
               </select>
@@ -66,7 +69,7 @@
             </td>
             <td class="col-md-2">
               <select class="form-control" size="2" name="aspmCount" [(ngModel)]="scrum.aspmCount"
-                (blur)="calAspmPercent()">
+                (change)="calAspmPercent()">
                 <option value="0" selected>0</option>
                 <option *ngFor="let value of aspmCounter;index as i" value="{{i+1}}">{{i+1}}</option>
               </select>
@@ -93,7 +96,7 @@
             </td>
             <td class="col-md-2">
               <select class="form-control" size="2" name="asmCount" [(ngModel)]="scrum.asmCount"
-                (blur)="calAsmPercent()">
+                (change)="calAsmPercent()">
                 <option value="0" selected>0</option>
                 <option *ngFor="let value of asmCounter;index as i" value="{{i+1}}">{{i+1}}</option>
               </select>
@@ -119,7 +122,7 @@
               <label>Event time:</label>
             </td>
             <td class="col-md-2">
-              <input type="text" class="form-control" name="eventTime" [(ngModel)]="scrum.eventTime" (blur)="updateCall()"/>
+              <input type="text" class="form-control" name="eventTime" [(ngModel)]="scrum.eventTime" (keyUp)="updateCall()"/>
             </td>
             <td class="col-md-2 mt-auto mb-auto">
               <p>M</p>
@@ -137,7 +140,7 @@
               <label>Number of raised issues:</label>
             </td>
             <td class="col-md-2">
-              <select class="form-control" size="2" name="issuesRaised" [(ngModel)]="scrum.issuesRaised" (blur)="updateCall()">
+              <select class="form-control" size="2" name="issuesRaised" [(ngModel)]="scrum.issuesRaised" (change)="updateCall()">
                 <option value="0" selected>0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -159,7 +162,7 @@
               <label>Pair Programming</label>
             </td>
             <td class="col-md-2">
-              <select class="form-control" size="2" name="noOfPairs" [(ngModel)]="scrum.noOfPairs">
+              <select class="form-control" size="2" name="noOfPairs" [(ngModel)]="scrum.noOfPairs" (change)="calNoOfPairsAvg()">
                 <option value="0" selected>0</option>
                 <option *ngFor="let value of pairCounter;index as i" value="{{i+1}}">{{i+1}}</option>
               </select>

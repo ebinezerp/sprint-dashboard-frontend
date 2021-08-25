@@ -55,30 +55,30 @@ export class SprintScrumSummaryService {
   }
 
   getSprintScrumSummary() {  
-    let totalNoOfTasks = 0;  
-    let totalDevCount = 0;
-    let totalDevPercent = 0;
-    let totalAspmCount = 0;
-    let totalAspmPercent = 0;
-    let totalAsmCount = 0;
-    let totalAsmPercent = 0;
-    let totalEventTime = 0;
-    let totalIssuesRaised = 0;
-    let totalPairCount = 0;
-    let totalPairPercent = 0;
+    let totalNoOfTasks:number = 0;  
+    let totalDevCount:number = 0;
+    let totalDevPercent:number = 0;
+    let totalAspmCount:number = 0;
+    let totalAspmPercent: number = 0;
+    let totalAsmCount: number = 0;
+    let totalAsmPercent:number = 0;
+    let totalEventTime: number = 0;
+    let totalIssuesRaised:number = 0;
+    let totalPairCount:number = 0;
+    let totalPairPercent:number = 0;
 
-    for(let sprint of this.sprintScrums){
-      totalNoOfTasks = this.add(totalNoOfTasks,sprint.noOfTasks);
-      totalDevCount = this.add(totalDevCount,sprint.devCount);
-      totalDevPercent = this.add(totalDevPercent,sprint.devPercent);
-      totalAspmCount = this.add(totalAspmCount,sprint.aspmCount);
-      totalAspmPercent = this.add(totalAspmPercent,sprint.aspmPercent);
-      totalAsmCount = this.add(totalAsmCount,sprint.asmCount);
-      totalAsmPercent = this.add(totalAsmPercent,sprint.asmPercent);
-      totalEventTime = this.add(totalEventTime,sprint.eventTime);
-      totalIssuesRaised = this.add(totalIssuesRaised,sprint.issuesRaised);
-      totalPairCount = this.add(totalPairCount,sprint.noOfPairs);
-      totalPairPercent = this.add(totalPairPercent,sprint.pairPercent);
+    for(let scrum of this.sprintScrums){
+      totalNoOfTasks = this.add(totalNoOfTasks, +scrum.noOfTasks);
+      totalDevCount = this.add(totalDevCount, +scrum.devCount);
+      totalDevPercent = this.add(totalDevPercent, +scrum.devPercent);
+      totalAspmCount = this.add(totalAspmCount, +scrum.aspmCount);
+      totalAspmPercent = this.add(totalAspmPercent, +scrum.aspmPercent);
+      totalAsmCount = this.add(totalAsmCount, +scrum.asmCount);
+      totalAsmPercent = this.add(totalAsmPercent, +scrum.asmPercent);
+      totalEventTime = this.add(totalEventTime, +scrum.eventTime);
+      totalIssuesRaised = this.add(totalIssuesRaised, +scrum.issuesRaised);
+      totalPairCount = this.add(totalPairCount, +scrum.noOfPairs);
+      totalPairPercent = this.add(totalPairPercent, +scrum.pairPercent);
     }
 
 
@@ -98,13 +98,8 @@ export class SprintScrumSummaryService {
     this.sprintScrumSummary = sprintScrumSummary;
   }
 
-  add(perviousValue: number,currentValue: number|undefined){
-    if(currentValue!= undefined){
-      perviousValue += currentValue;
-    }else{
-      perviousValue += 0;
-    }
-    return perviousValue;
+  add(perviousValue: number,currentValue: number):number{
+    return perviousValue+currentValue;
   }
 
   getAvarage(value: number) {

@@ -1,17 +1,17 @@
 
 
 export class SprintScrumSummary {
-  sprintNoOfTasksAvg=0;
-  sprintDevCountAvg =0;
-  sprintDevPercentAvg=0;
-  sprintAspmCountAvg=0;
-  sprintAspmPercentAvg=0;
-  sprintAsmCountAvg = 0;
-  sprintAsmPercentAvg = 0;
-  sprintEventTimeAvg = 0;
-  sprintIssuesRaisedAvg = 0;
-  sprintPairCountAvg = 0;
-  sprintPairPercentAvg = 0;
+  sprintNoOfTasksAvg:number=0;
+  sprintDevCountAvg:number =0;
+  sprintDevPercentAvg:number=0;
+  sprintAspmCountAvg:number=0;
+  sprintAspmPercentAvg:number=0;
+  sprintAsmCountAvg:number = 0;
+  sprintAsmPercentAvg:number = 0;
+  sprintEventTimeAvg:number = 0;
+  sprintIssuesRaisedAvg:number = 0;
+  sprintPairCountAvg:number = 0;
+  sprintPairPercentAvg:number = 0;
 
   clone(): SprintScrumSummary {
     const newOne = new SprintScrumSummary();

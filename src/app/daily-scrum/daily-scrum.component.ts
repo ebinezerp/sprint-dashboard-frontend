@@ -15,12 +15,13 @@ import { UserService } from '../services/user.service';
 })
 export class DailyScrumComponent implements OnInit {
 
+  message?: string;
   scrum: DailyScrum;
   usersList: User[] = [];
-  devTotalCount=0;
-  aspmTotalCount=0;
-  asmTotalCount=0;
-  pairTotalCount=0;
+  devTotalCount: number =0;
+  aspmTotalCount: number =0;
+  asmTotalCount: number =0;
+  pairTotalCount: number =0;
   devCounter:any[]=[];
   aspmCounter:any[]=[];
   asmCounter:any[]=[];
@@ -41,7 +42,6 @@ export class DailyScrumComponent implements OnInit {
       (event: Event) => {
           if(event instanceof NavigationStart){
             if(this.scrum!= undefined){
-              console.log(this.scrum);
               sessionStorage.setItem('scrum', JSON.stringify(this.scrum));
               sessionStorage.setItem('sprintScrumSummary',JSON.stringify(this.sprintScrumSummary));
             }
@@ -67,6 +67,14 @@ export class DailyScrumComponent implements OnInit {
       } 
     );
 
+
+    const sprintScrumSummaryStr = sessionStorage.getItem('sprintScrumSummary');
+    if(sprintScrumSummaryStr!=null){
+      this.sprintScrumSummary = JSON.parse(sprintScrumSummaryStr);
+    }
+
+
+
     const scrumStr = sessionStorage.getItem('scrum');
     if(scrumStr != null){
       this.scrum = JSON.parse(scrumStr);
@@ -82,21 +90,15 @@ export class DailyScrumComponent implements OnInit {
     this.sprintScrumSummaryService.sprintScrumSummaryObservable.subscribe(
       (sprintScrumSummary) => {
         this.sprintScrumSummary = sprintScrumSummary;
-        console.log(this.sprintScrumSummary);
       }
     )
-
-    const sprintScrumSummaryStr = sessionStorage.getItem('sprintScrumSummary');
-    if(sprintScrumSummaryStr!=null){
-      this.sprintScrumSummary = JSON.parse(sprintScrumSummaryStr);
-    }
 
   }
 
 
   calDevPercent(){
     let devCount = this.scrum.devCount;
-    if(devCount != undefined){
+    if(devCount != 0){
       this.scrum.devPercent = (devCount *100)/this.devTotalCount;
     }else{
       this.scrum.devPercent = 0;
@@ -107,7 +109,7 @@ export class DailyScrumComponent implements OnInit {
 
   calAspmPercent(){
     let aspmCount = this.scrum.aspmCount;
-    if(aspmCount != undefined){
+    if(aspmCount != 0){
       this.scrum.aspmPercent = (aspmCount*100)/this.aspmTotalCount;
     }else{
       this.scrum.aspmPercent = 0;
@@ -117,10 +119,20 @@ export class DailyScrumComponent implements OnInit {
 
   calAsmPercent() {
     let asmCount = this.scrum.asmCount;
-    if(asmCount != undefined){
+    if(asmCount != 0){
       this.scrum.asmPercent = (asmCount*100)/this.asmTotalCount;
     }else{
       this.scrum.asmPercent = 0;
+    }
+    this.updateCall();
+  }
+
+  calNoOfPairsAvg(){
+    let noOfPairs = this.scrum.noOfPairs;
+    if(noOfPairs != 0){
+      this.scrum.noOfPairs = (noOfPairs*100)/this.pairTotalCount;
+    }else{
+      this.scrum.noOfPairs = 0;
     }
     this.updateCall();
   }
@@ -133,7 +145,12 @@ export class DailyScrumComponent implements OnInit {
   submit(scrumForm: NgForm){
     let scrum: DailyScrum = scrumForm.value;
     scrum.dailyScrumId = this.scrum.dailyScrumId;
-    this.dailyScrumService.save(scrum).subscribe()
+    this.dailyScrumService.save(scrum).subscribe(
+      ()=>{
+        this.message = 'Daily Scrum details are added sccessfully';
+        scrumForm.resetForm();
+      }
+    )
   }
 
 }
